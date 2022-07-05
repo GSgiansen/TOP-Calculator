@@ -9,37 +9,63 @@ numberpad.classList.add("numberpad")
 
 container.appendChild(display)
 container.appendChild(numberpad)
+let stack=[]
+let num=""
 
-const operators =[
-    {"+": function add(a,b){
+const operators =new Map([
+    ["+",function add(a,b){
         return a+b;
-    }},
-    {"-":function substract(a,b){
+    }],
+    ["-",function substract(a,b){
         return a-b;
-    }
-},
-    {"*":function multiply(a,b){
+    }],
+    ["*",function multiply(a,b){
         return a*b;
-    }},
-    {"/":function divide(a,b){
+    }],
+    ["/",function divide(a,b){
         return a/b;
-    }}
+    }]
 
-]
+])
 
-function operate(num1,op,num2){
-    console.log(op(num1,num2))
-    add
-    return op(num1,num2)
+function clear(){
+    stack=[]
+    num=""
+    display.textContent=""
+
 }
+function operate(){
+
+    stack.push(num)
+    console.log(stack)
+    while (stack.length!=1){
+    let num1=parseFloat(stack[0])
+    let op=stack[1]
+    let num2=parseFloat(stack[2])
+    let ans=operators.get(op)(num1,num2)
+    stack=stack.slice(3)
+    stack.splice(0,0,ans)
+    console.log(stack)
+    }
+    display.textContent=stack[0]
+    return stack[0]
+}
+
 function addToDisplay(){
     if (!displayflag){
         display.textContent=""
         displayflag=true}
-    console.log(this)
+    if (this.classList.contains("op")){
+        console.log(num)
+        stack.push(num)
+        num=""
+        stack.push(this.textContent)
+    }
     curr=display.textContent
+    if (!this.classList.contains("op")) num+=this.textContent
     curr=curr+this.textContent
     display.textContent=curr
+    console.log(stack)
 }
 
 displayflag=false;
@@ -52,36 +78,49 @@ for(let i=0;i<10;i++){
 
 
 }
+
+
+
 const addB=document.createElement("button")
+addB.classList.add("op")
 addB.textContent="+"
 addB.addEventListener("click",addToDisplay)
-
+addB.value="+"
 const subtractB=document.createElement("button")
 subtractB.textContent="-"
+subtractB.classList.add("op")
 subtractB.addEventListener("click",addToDisplay)
 
 
 const multiplyB=document.createElement("button")
 multiplyB.textContent="*"
+multiplyB.classList.add("op")
 multiplyB.addEventListener("click",addToDisplay)
 
 
 const divideB=document.createElement("button")
 divideB.textContent="/"
+divideB.classList.add("op")
 divideB.addEventListener("click",addToDisplay)
 
 const equal=document.createElement("button")
 equal.textContent="="
 equal.addEventListener("click",operate)
 
+const wipe=document.createElement("button")
+wipe.textContent="CLEAR"
+wipe.addEventListener("click",clear)
+
+
 numberpad.appendChild(addB)
 numberpad.appendChild(subtractB)
 numberpad.appendChild(multiplyB)
 numberpad.appendChild(divideB)
 numberpad.appendChild(equal)
+numberpad.appendChild(wipe)
 
 
-let stack=[]
+
 
 
 
