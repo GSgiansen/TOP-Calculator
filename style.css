@@ -2,6 +2,25 @@
     height:800px;
     width:960px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+}
+body{
+    display: flex;
+    justify-content: center;
+}
+
+.display{
+    width:960px;
+    text-align: right;
+
+}
+.numberpad{
+width:960px;
+height:600px;
+}
+
+button{
+    background-color: orange;
+    align-self: center;
 }
