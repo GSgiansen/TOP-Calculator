@@ -12,11 +12,12 @@ body{
 }
 
 .display{
+    border: 5px solid black;
     min-height: 100px;
-    font-size: larger;
+    font-size: 70px;
     width:960px;
     text-align: right;
-
+    margin-bottom: 50px;
 }
 .numberpad{
 width:960px;
