@@ -42,6 +42,11 @@ function operate(){
     let num1=parseFloat(stack[0])
     let op=stack[1]
     let num2=parseFloat(stack[2])
+    if (num2==0){
+        console.log(num2)
+        display.textContent=" ZERO ERROR!!!!!"
+        return "ERROR!!!!!"
+    }
     let ans=operators.get(op)(num1,num2)
     stack=stack.slice(3)
     stack.splice(0,0,ans)
@@ -59,7 +64,16 @@ function addToDisplay(){
         console.log(num)
         stack.push(num)
         num=""
+        deciflag=false;
         stack.push(this.textContent)
+    }
+    if (this.classList.contains("deci")){
+        if(!deciflag){
+            deciflag=true;
+            num+="."
+            display.textContent+="."
+            return 
+        }
     }
     curr=display.textContent
     if (!this.classList.contains("op")) num+=this.textContent
@@ -69,7 +83,7 @@ function addToDisplay(){
 }
 
 displayflag=false;
-
+deciflag=false;
 for(let i=0;i<10;i++){
     const button=document.createElement("button")
     button.textContent=i
@@ -111,14 +125,19 @@ const wipe=document.createElement("button")
 wipe.textContent="CLEAR"
 wipe.addEventListener("click",clear)
 
+const deci=document.createElement("button")
+deci.textContent="."
+deci.classList.add("deci")
+deci.addEventListener("click",addToDisplay)
 
 numberpad.appendChild(addB)
 numberpad.appendChild(subtractB)
 numberpad.appendChild(multiplyB)
 numberpad.appendChild(divideB)
+numberpad.appendChild(deci)
 numberpad.appendChild(equal)
-numberpad.appendChild(wipe)
 
+numberpad.appendChild(wipe)
 
 
 
