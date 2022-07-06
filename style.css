@@ -1,12 +1,11 @@
 #container{
     height:800px;
     width:960px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
 }
 body{
-    font-family: "Lucida Console", "Courier New", monospace; ;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font: bold;
     display: flex;
     justify-content: center;
 }
@@ -22,12 +21,30 @@ body{
 .numberpad{
 width:960px;
 height:600px;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 button{
     background-color: orange;
     align-self: center;
     font-size: large;
-    height: 50px;
-    min-width: 50px;
+    height: 100px;
+    min-width: 100px;
+}
+
+.op{
+    background-color: cornflowerblue;
+
+}
+
+.zero{
+    width:200px;
+    height:100px;
+}
+
+.ops1, .ops2{
+    display: flex;
+    flex-direction:column;
 }
