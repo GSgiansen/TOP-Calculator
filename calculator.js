@@ -36,6 +36,8 @@ const operators =new Map([
 function clear(){
     stack=[]
     num=""
+    state=[stack,num]
+    
     display.textContent=""
 
 }
@@ -43,6 +45,7 @@ function operate(){
 
     stack.push(num)
     console.log(stack)
+    console.log(num)
     while (stack.length!=1){
     let num1=parseFloat(stack[0])
     let op=stack[1]
@@ -58,7 +61,9 @@ function operate(){
     console.log(stack)
     }
     display.textContent=stack[0]
-    return stack[0]
+    num=String(stack[0])
+    stack=[]
+    
 }
 
 function addToDisplay(){
